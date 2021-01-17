@@ -17,7 +17,6 @@ import com.jonasoliveira.lojaweb.domain.Endereco;
 import com.jonasoliveira.lojaweb.domain.enums.TipoCliente;
 import com.jonasoliveira.lojaweb.dto.ClienteDTO;
 import com.jonasoliveira.lojaweb.dto.ClienteNewDTO;
-import com.jonasoliveira.lojaweb.repositories.CidadeRepository;
 import com.jonasoliveira.lojaweb.repositories.ClienteRepository;
 import com.jonasoliveira.lojaweb.repositories.EnderecoRepository;
 import com.jonasoliveira.lojaweb.services.exceptions.DataIntegrityException;
@@ -57,7 +56,7 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);
 		}catch (DataIntegrityViolationException e){
-			throw new DataIntegrityException("Não é possível excluir um cliente pois ha entidades relacionadas!");
+			throw new DataIntegrityException("Não é possível excluir um cliente pois ha pedidos relacionadas!");
 		}
 	}
 	
