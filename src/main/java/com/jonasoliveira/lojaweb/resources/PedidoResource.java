@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jonasoliveira.lojaweb.domain.Categoria;
 import com.jonasoliveira.lojaweb.domain.Pedido;
-import com.jonasoliveira.lojaweb.dto.CategoriaDTO;
 import com.jonasoliveira.lojaweb.services.PedidoService;
 
 @RestController

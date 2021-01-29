@@ -24,6 +24,7 @@ public class SmtpEmailService extends AbstractEmailService{
 	@Override
 	public void sendEmail(SimpleMailMessage msg) {
 		LOG.info("(Mock) Envio de email...");
+		LOG.info(msg.toString());
 		mailSender.send(msg);
 		LOG.info("(Mock) Email enviado");	
 	}
@@ -31,6 +32,7 @@ public class SmtpEmailService extends AbstractEmailService{
 	@Override
 	public void sendHtmlEmail(MimeMessage msg) {
 		LOG.info("(Mock) Envio de email...");
+		LOG.info(msg.toString());
 		javaMailSender.send(msg);
 		LOG.info("(Mock) Email enviado");	
 	}
