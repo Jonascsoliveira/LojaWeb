@@ -1,5 +1,6 @@
 package com.jonasoliveira.lojaweb.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jonasoliveira.lojaweb.domain.Cidade;
 import com.jonasoliveira.lojaweb.domain.Cliente;
@@ -38,6 +40,9 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	private S3Service s3Service;
+	
 	public Cliente find(Integer id) {
 		
 		UserSS user = UserService.authenticated();
@@ -48,7 +53,7 @@ public class ClienteService {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
-		}
+	}
 	
 	@Transactional
 	public Cliente insert(Cliente obj) {
@@ -106,5 +111,8 @@ public class ClienteService {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 	}
-	//Cidade cid = new Cidade(objDto.getCidadeId(),null,null); na linha dois
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
+	}
 }
