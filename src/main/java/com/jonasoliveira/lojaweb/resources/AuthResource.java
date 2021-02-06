@@ -31,6 +31,7 @@ public class AuthResource {
 		UserSS user = UserService.authenticated();
 		String token = jwtUtil.generateToken(user.getUsername());
 		response.addHeader("Authorization", "Bearer " + token);
+		response.addHeader("access-control-expose-headers", "Authorization");
 		return ResponseEntity.noContent().build();
 	}
 	
@@ -40,3 +41,21 @@ public class AuthResource {
 		return ResponseEntity.noContent().build();
 	}
 }
+/*Json Configuracao de cors S3 AWS exemplo https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+	[
+	   {
+	        "AllowedHeaders": [
+	            "Authorization"
+	        ],
+	        "AllowedMethods": [
+	            "GET"
+	        ],
+	        "AllowedOrigins": [
+	            "http//*",
+	            "https//*"
+	        ],
+	        "ExposeHeaders": [],
+	        "MaxAgeSeconds": 3000
+	    }
+	]
+*/
