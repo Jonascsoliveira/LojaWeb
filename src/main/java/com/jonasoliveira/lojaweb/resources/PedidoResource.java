@@ -18,18 +18,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.jonasoliveira.lojaweb.domain.Pedido;
 import com.jonasoliveira.lojaweb.services.PedidoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/pedidos")
 public class PedidoResource {
 	@Autowired
 	private PedidoService service;
 	
+	@ApiOperation(value="Busca pedido por id")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
 		Pedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value="Insere novo pedido")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj){
 		obj = service.insert(obj);
@@ -38,6 +42,7 @@ public class PedidoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation(value="Lista todos pedidos por paginação")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<Pedido>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 

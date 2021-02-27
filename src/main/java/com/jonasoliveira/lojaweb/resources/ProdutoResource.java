@@ -16,6 +16,8 @@ import com.jonasoliveira.lojaweb.dto.ProdutoDTO;
 import com.jonasoliveira.lojaweb.resources.utils.URL;
 import com.jonasoliveira.lojaweb.services.ProdutoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/produtos")
 public class ProdutoResource {
@@ -23,12 +25,14 @@ public class ProdutoResource {
 	@Autowired
 	private ProdutoService service;
 	
+	@ApiOperation(value="Busca produto por id")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Produto> find(@PathVariable Integer id) {
 		Produto obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value="Lista todos produtos por paginação")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 			@RequestParam(value="nome", defaultValue="") String nome, 
